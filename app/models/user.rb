@@ -10,7 +10,7 @@ has_many :roles, through: :permissions
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
- validates_presence_of :username, :mobile,  :dob
+ validates_presence_of :username, :mobile, :gender, :dob
 
 after_create :assign_customer_role
 

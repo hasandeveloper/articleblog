@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+
+    <%= notice %>
+    <%= alert %>
+    <% if user_signed_in? %>
+<div>  welcome: <%= current_user.username %> </div></br>
+    <%= link_to "Categories", categories_path%>| <%= link_to "Articles", articles_path%>|  <%= link_to "Account Setting", edit_user_registration_path %>  | <%= link_to "Logout", destroy_user_session_path, method: :delete %> |
+    <% else %>
+      <%= link_to "Register", new_user_registration_path %> | <%= link_to "Login", new_user_session_path %> |
+    <% end %>
+    <%= yield %>
+    <% if user_signed_in? %>
+    <p> You current IP (<%= current_user.current_sign_in_ip %>) </p>
+  <% end %>
+  </body>
+</html>

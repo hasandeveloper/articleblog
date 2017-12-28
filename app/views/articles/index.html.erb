@@ -1,0 +1,22 @@
+<h1>List of Articles (<%=@articles.length%>)</h1>
+<%if @articles.empty?%>
+<h4>Articles Not Found</h4>
+<%else%>
+<ol>
+<% @articles.each do |article|%>
+<% if article.is_published == nil%>
+<ul>
+  <li><%=link_to article.title, article_path(article)%></br>  Categroy Belongs To:<%= article.category.name%></br>Publish_date:<%=article.publish_date%></li>
+  </ul>
+   <%elsif article.is_published == true%>
+   <ul>
+     <li><%=link_to article.title, article_path(article)%></br>  Categroy Belongs To:<%= article.category.name%></br>Publish_date:<%=article.publish_date%></br>This Article Is Added By:<%=article.user.email%></li>
+     </ul>
+
+    <%end%>
+
+    <%end%>
+    <%end%>
+
+
+<%= link_to "Do You Wanna Add Article?", new_article_path%>

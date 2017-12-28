@@ -1,0 +1,30 @@
+<h4>Title:<%=@articles.title%></h4></br>
+<h4>Article Body:</br><%=@articles.body%></h4></br>
+<h4>This Article Belongs To:<%=@articles.category.name%></h4></br>
+<h4>Pusblish date:<%=@articles.publish_date%></h4></br>
+<%= image_tag(@articles.cover.url) if @articles.cover %></br>
+<h4>This Article Is Added By:<%=@articles.user.email%></h4></br>
+
+<h2>Comment For This Article</h2>
+<% if @articles.reviews.empty? %>
+<p>No Reviews For This Article Be The First Review</p>
+<%else%>
+<ol>
+  <% @articles.reviews.each do |review| %>
+<li><%= review.body%></br>Added By:<%=review.user.email%>-<%= link_to "Delete", review_path(review), method: :delete, data: {confirm: "Are You sure You Want To Delete This Review"}%>|<%= link_to "Edit", edit_review_path(review.id)%></li>
+<%end%>
+</ol>
+<%end%>
+
+
+<h2>Add Comment For This Article</h2>
+<%=form_for @review do |f|%>
+<label for="review_body">Body:</label></br>
+<%=f.text_area :body%></br>
+<%=f.hidden_field :article_id, :value => @articles.id%>
+
+<%=f.submit "Add"%>
+<%end%>
+
+
+<%= link_to "Edit", edit_article_path(@articles)%>|<%= link_to "Delete", article_path(@articles), method: :delete%>|<%= link_to "List Articles", articles_path%>

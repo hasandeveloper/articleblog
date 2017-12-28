@@ -1,0 +1,15 @@
+
+<h2>Name:<%= @categories.name%></br></h2>
+<h2>Description:<%= @categories.description%></h2></br>
+<h4>List Articles(<%=@categories.articles.length%>)</h4>
+<% if @categories.articles.empty? %>
+<p>Category Not Found</p>
+<%else%>
+<ol>
+  <% @categories.articles.each do |article|%>
+  <li><%=link_to article.title, article_path(article.id)%></br>  Publish_date:<%=article.publish_date%></li>
+  <%end%>
+</ol>
+<%end%>
+
+<%= link_to "Edit", edit_category_path(@categories.id)%>|<%= link_to "Delete", category_path(@categories.id), method: :delete, data: {confirm:"Are you sure"}%>
